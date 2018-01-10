@@ -18,9 +18,13 @@ module.exports = {
   module: {
     loaders: [
       {
+        test: /\.js$/,
+        loader: 'babel-loader',
+        exclude: /node_modules/
+      },
+      {
         test: /\.jsx?$/,
         loader: 'babel-loader',
-        exclude: /node_modules/,
         include: [
           path.resolve(__dirname,'app')
         ],
@@ -45,6 +49,9 @@ module.exports = {
             }
           ]
         })
+      },{
+        test: /\.less$/,
+        loader: 'style-loader!css-loader!less-loader'
       }
     ]
   },
