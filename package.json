@@ -1,0 +1,36 @@
+{
+  "name": "player-react",
+  "version": "1.0.0",
+  "description": "A music player created by react",
+  "main": "app/index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "bulid": "webpack",
+    "dev": "webpack-dev-server --devtool eval --progress --colors --hot --content-base bulid",
+    "deploy": "cross-env NODE_ENV=production webpack -p --config webpack.production.config.js"
+  },
+  "keywords": [
+    "music-player",
+    "webpack",
+    "react"
+  ],
+  "author": "Summy",
+  "license": "MIT",
+  "devDependencies": {
+    "babel-core": "^6.26.0",
+    "babel-loader": "^7.1.2",
+    "babel-plugin-transform-runtime": "^6.23.0",
+    "babel-preset-es2015": "^6.24.1",
+    "babel-preset-react": "^6.24.1",
+    "babel-preset-stage-0": "^6.24.1",
+    "cross-env": "^5.1.3",
+    "webpack": "^3.10.0",
+    "webpack-dev-server": "^2.10.1"
+  },
+  "dependencies": {
+    "babel-polyfill": "^6.26.0",
+    "babel-runtime": "^6.26.0",
+    "react": "^16.2.0",
+    "react-dom": "^16.2.0"
+  }
+}
