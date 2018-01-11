@@ -1,18 +1,18 @@
-var path = require('path');
-var webpack = require('webpack');
-var HtmlWebpackPlugin = require('html-webpack-plugin');
-var ExtractTextPlugin = require('extract-text-webpack-plugin')
+const path = require('path')
+const webpack = require('webpack')
+// const HtmlWebpackPlugin = require('html-webpack-plugin')
+const ExtractTextPlugin = require('extract-text-webpack-plugin')
 module.exports = {
   entry: {
     app:[ 
       'babel-polyfill',
-      'webpack/hot/dev-server', //自动更新
-      'webpack-dev-server/client?http://localhost:8080', //自动更新
-      path.resolve(__dirname,'app/index.js')
+      'webpack/hot/dev-server', // 自动更新
+      'webpack-dev-server/client?http://localhost:8080', // 自动更新
+      path.resolve(__dirname, 'app/index.js')
     ]
   },
   output: {
-    path: path.resolve(__dirname,'bulid'),
+    path: path.resolve(__dirname, 'dist'),
     filename: 'bundle.js'
   },
   module: {
@@ -26,13 +26,14 @@ module.exports = {
         test: /\.jsx?$/,
         loader: 'babel-loader',
         include: [
-          path.resolve(__dirname,'app')
+          path.resolve(__dirname, 'app')
         ],
         query: {
           plugins: ['transform-runtime'],
-          presets: ['es2015','stage-0','react']
+          presets: ['es2015', 'stage-0', 'react']
         }
-      },{
+      },
+      {
         test: /\.css$/,
         use: ExtractTextPlugin.extract({
           fallback: 'style-loader',
@@ -44,19 +45,20 @@ module.exports = {
                 localIndentName: '[name]__[local]--[hash:base64:5]'
               }
             },
-            { 
-             loader: 'postcss-loader' 
+            {
+              loader: 'postcss-loader'
             }
           ]
         })
-      },{
+      },
+      {
         test: /\.less$/,
         loader: 'style-loader!css-loader!less-loader'
       }
     ]
   },
   plugins: [
-    //提取公共代码
+    // 提取公共代码
     new webpack.optimize.CommonsChunkPlugin(
       {
         name: 'react',
