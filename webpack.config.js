@@ -16,11 +16,15 @@ module.exports = {
     filename: 'bundle.js'
   },
   module: {
-    loaders: [
+    rules: [
       {
         test: /\.js$/,
         loader: 'babel-loader',
         exclude: /node_modules/
+      },
+      {
+        test: /\.html/,
+        loader: 'html-loader'
       },
       {
         test: /\.jsx?$/,
@@ -49,9 +53,13 @@ module.exports = {
             }
           ]
         })
-      },{
+      },
+      {
         test: /\.less$/,
         loader: 'style-loader!css-loader!less-loader'
+      },{
+        test: /\.(png|jpg|jpeg|gif|eot|ttf|woff|woff2|svg|svg2)(\?.+)$/,
+        loader: 'url-loader?limit=10000'
       }
     ]
   },
@@ -62,6 +70,13 @@ module.exports = {
         name: 'react',
         filename: 'react.js'
       }
-    )
-  ]
+    ),
+    new HtmlWebpackPlugin({
+      template: 'index.html'
+    })
+  ],
+  devServer: {
+    port: 8080,
+    historyApiFallback: true
+  }
 }
