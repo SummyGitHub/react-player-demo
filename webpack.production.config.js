@@ -9,17 +9,15 @@ module.exports = {
   },
   output: {
     path: path.resolve(__dirname,'bulid'),
+    publcPath: '/images/', // 指定打包的时候静态资源的路径
     filename: 'app.js'
   },
   module: {
     loaders: [
       {
-        test: /\.jsx?$/,
-        loader: 'babel-loader',
+        test: /.js$/,
+        loader: "babel-loader",
         exclude: /node_modules/,
-        include: [
-          path.resolve(__dirname,'app')
-        ],
         query: {
           plugins: ['transform-runtime'],
           presets: ['es2015','stage-0','react']

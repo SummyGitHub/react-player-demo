@@ -1,7 +1,26 @@
 'use strict'
 import React from 'react'
 import {render} from 'react-dom'
-import Component from './component'
+import Hello from './components/hello'
+import getRouter from 'router/index'
+import {AppContainer} from 'react-hot-loader'
 
-render(<Component />,document.getElementById('main'));  
+const renderWithHotReload = (RootElement) => {
+  render(
+    <AppContainer>
+      {RootElement}
+    </AppContainer>,
+  document.getElementById('main')) 
+}
+
+//初始化
+renderWithHotReload(getRouter());
+
+//模块热替换
+if(module.hot){
+  module.hot.accept();
+}
+
+
+ 
 
