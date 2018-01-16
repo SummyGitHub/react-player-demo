@@ -3,18 +3,14 @@ export const INCREMENT = "counter/INCREMENT";
 export const DECREMENT = "counter/DECREMENT";
 export const RESET = "counter/RESET";
 
-const increment = () => {
+export function increment () {
   return {type: INCREMENT}
 }
 
-const decrement = () => {
+export function decrement () {
   return {type: DECREMENT}
 }
 
-const reset = () => {
+export function reset (){
   return {type: RESET}
 }
-
-export default increment;
-export default decrement;
-export default reset;

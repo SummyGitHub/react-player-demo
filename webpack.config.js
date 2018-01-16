@@ -1,16 +1,3 @@
-<<<<<<< HEAD
-const path = require('path')
-const webpack = require('webpack')
-// const HtmlWebpackPlugin = require('html-webpack-plugin')
-const ExtractTextPlugin = require('extract-text-webpack-plugin')
-module.exports = {
-  entry: {
-    app:[ 
-      'babel-polyfill',
-      'webpack/hot/dev-server', // 自动更新
-      'webpack-dev-server/client?http://localhost:8080', // 自动更新
-      path.resolve(__dirname, 'app/index.js')
-=======
 let path = require('path');
 let webpack = require('webpack');
 let HtmlWebpackPlugin = require('html-webpack-plugin');
@@ -23,7 +10,6 @@ module.exports = {
       // 'webpack-dev-server/client?http://localhost:8080', //自动更新
       'react-hot-loader/patch',
       path.resolve(__dirname,'app/index.js')
->>>>>>> dev
     ]
   },
   output: {
@@ -34,7 +20,9 @@ module.exports = {
     alias: {
       'pages': path.resolve(__dirname,'app/pages'),
       'components': path.resolve(__dirname,'app/components'),
-      'router': path.resolve(__dirname,'app/router')
+      'router': path.resolve(__dirname,'app/router'),
+      'actions': path.resolve(__dirname,'app/redux/actions'),
+      'reducers': path.resolve(__dirname,'app/redux/reducers'),
     }
   },
   module: {
@@ -52,17 +40,12 @@ module.exports = {
         test: /\.jsx?$/,
         loader: 'babel-loader?cacheDirectory=true',
         include: [
-<<<<<<< HEAD
           path.resolve(__dirname, 'app')
         ],
         query: {
           plugins: ['transform-runtime'],
           presets: ['es2015', 'stage-0', 'react']
         }
-=======
-          path.resolve(__dirname,'app')
-        ]
->>>>>>> dev
       },
       {
         test: /\.css$/,

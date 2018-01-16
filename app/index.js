@@ -1,14 +1,19 @@
 'use strict'
 import React from 'react'
 import {render} from 'react-dom'
-import Hello from './components/hello'
+import Hello from 'components/hello'
 import getRouter from 'router/index'
 import {AppContainer} from 'react-hot-loader'
+import {Provider} from 'react-redux'
+import store from './redux/store'
+
 
 const renderWithHotReload = (RootElement) => {
   render(
     <AppContainer>
-      {RootElement}
+      <Provider store={store}>
+        {RootElement}
+      </Provider>
     </AppContainer>,
   document.getElementById('main')) 
 }
