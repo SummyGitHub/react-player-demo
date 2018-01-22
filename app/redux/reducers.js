@@ -1,6 +1,8 @@
+import {combineReducers} from 'redux'
 import counter from './reducers/counter';
-export default function combineReducers(state={},action) {
-  return {
-    counter: counter(state.counter,action)
-  }
-}
+import userInfo from './reducers/userInfo'
+
+export default combineReducers({
+  counter,
+  userInfo
+})

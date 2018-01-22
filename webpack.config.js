@@ -1,7 +1,8 @@
 let path = require('path');
 let webpack = require('webpack');
 let HtmlWebpackPlugin = require('html-webpack-plugin');
-var ExtractTextPlugin = require('extract-text-webpack-plugin')
+let ExtractTextPlugin = require('extract-text-webpack-plugin')
+let autoprefixer = require('autoprefixer')
 module.exports = {
   entry: {
     app:[ 
@@ -14,7 +15,8 @@ module.exports = {
   },
   output: {
     path: path.resolve(__dirname, 'dist'),
-    filename: 'bundle.js'
+    filename: 'bundle.js',
+    chunkFilename: '[name].js'
   },
   resolve: {
     alias: {
@@ -25,6 +27,7 @@ module.exports = {
       'reducers': path.resolve(__dirname,'app/redux/reducers'),
     }
   },
+  devtool: 'inline-source-map',
   module: {
     rules: [
       {
@@ -49,31 +52,22 @@ module.exports = {
       },
       {
         test: /\.css$/,
-        use: ExtractTextPlugin.extract({
-          fallback: 'style-loader',
-          use: [
-            {
-              loader: 'css-loader',
-              options: {
-                modules: true,
-                localIndentName: '[name]__[local]--[hash:base64:5]'
-              }
-            },
-            {
-              loader: 'postcss-loader'
-            }
-          ]
-        })
+        use: ['style-loader','css-loader', 'postcss-loader']
       },
       {
         test: /\.less$/,
         loader: 'style-loader!css-loader!less-loader'
       },{
+        /**
+         * url-loader 一般用于将小图片转成base64格式，如此处，小于10000k的图片将使用url-loader直接以base64的形式内联在代码中，可以减少一次http请求。
+         * *file-loader用于大图片、其他文件等，url-loader是file-loader的上层封装
+         */
         test: /\.(png|jpg|jpeg|gif|eot|ttf|woff|woff2|svg|svg2)(\?.+)$/,
         loader: 'url-loader?limit=10000'
       }
     ]
   },
+  postcss: [autoprefixer({browsers: ['last 2 version']})],
   plugins: [
     // 提取公共代码
     new webpack.optimize.CommonsChunkPlugin(
