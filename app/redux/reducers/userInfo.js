@@ -18,7 +18,8 @@ const reducer = (state = initState,action) => {
       return {
         ...state,
         isLoading: false,
-        userInfo: action.userInfo,
+        // userInfo: action.userInfo,
+        userInfo: action.result.data,
         errorMsg: ''
       };
     case GET_USER_INFO_FAIL:
